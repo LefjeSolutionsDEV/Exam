@@ -1,16 +1,407 @@
-Senior Java + DevOps
-Technical Examination
-18 questions · 70 minutes · Proctored
-Your results will be sent automatically to the hiring team.
-⚠ Rules — read carefully before starting
-	•	You have 70 minutes total. The exam auto-submits when time runs out.
-	•	Each question has its own time limit — it auto-advances when expired.
-	•	Do not switch tabs, open other windows, or use search engines.
-	•	All tab switches and window focus losses are recorded and reported.
-	•	Copy/paste and right-click are disabled during the exam.
-	•	Your results including all violations will be emailed to the hiring team automatically.
-	•	Once you click Start — the timer begins immediately.
-FULL NAME *
-EMAIL ADDRESS *
-POSITION APPLIED FOR
-I have read the rules — Start Exam → 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senior Java + DevOps — Technical Examination</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f0;color:#1a1a1a;min-height:100vh;padding:24px 16px}
+#start-wrap,#exam-wrap,#result-wrap{max-width:720px;margin:0 auto}
+#exam-wrap,#result-wrap{display:none}
+
+/* START SCREEN */
+.start-card{background:#fff;border:1px solid #e0ddd5;border-radius:12px;padding:40px;box-shadow:0 1px 3px rgba(0,0,0,0.06);text-align:center}
+.start-title{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:8px}
+.start-sub{font-size:14px;color:#666;margin-bottom:32px;line-height:1.6}
+.start-rules{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:16px;text-align:left;margin-bottom:28px}
+.start-rules h3{font-size:13px;font-weight:600;color:#92400e;margin-bottom:10px}
+.start-rules li{font-size:12px;color:#78350f;margin-bottom:6px;line-height:1.5;margin-left:16px}
+.field-group{margin-bottom:16px;text-align:left}
+.field-group label{display:block;font-size:12px;font-weight:600;color:#444;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.field-group input{width:100%;font-size:14px;padding:10px 14px;border:1px solid #e0ddd5;border-radius:8px;background:#fafaf7;color:#1a1a1a;font-family:inherit}
+.field-group input:focus{outline:none;border-color:#059669;background:#fff}
+.field-error{font-size:11px;color:#dc2626;margin-top:4px;display:none}
+
+/* EXAM */
+.exam-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fff;border:1px solid #e0ddd5;border-radius:12px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.exam-title{font-size:14px;font-weight:600;color:#1a1a1a}
+.exam-sub{font-size:12px;color:#888;margin-top:3px}
+.timer{font-size:24px;font-weight:600;letter-spacing:2px;color:#1a1a1a;min-width:80px;text-align:right}
+.timer.warn{color:#dc2626}
+.progress-wrap{height:4px;background:#e5e2d9;border-radius:2px;margin-bottom:20px}
+.progress-bar{height:4px;background:#059669;border-radius:2px;transition:width 0.4s}
+.warn-banner{display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:12px;color:#dc2626;margin-bottom:16px}
+.warn-banner.show{display:block}
+.section-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.q-card{background:#fff;border:1px solid #e0ddd5;border-radius:12px;padding:20px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.q-num{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.08em}
+.q-time-badge{font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid #e0ddd5;color:#666;background:#fafaf7}
+.q-time-badge.critical{border-color:#fca5a5;color:#dc2626;background:#fef2f2}
+.q-text{font-size:15px;color:#1a1a1a;line-height:1.6;margin-bottom:14px;white-space:pre-wrap}
+.options{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid #e0ddd5;border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:13px;color:#1a1a1a;line-height:1.5;background:#fafaf7;user-select:none}
+.opt:hover{border-color:#a3a39a;background:#f0efea}
+.opt.selected{border-color:#059669;background:#ecfdf5;color:#065f46}
+.opt input[type=radio]{accent-color:#059669;margin-top:2px;flex-shrink:0}
+textarea.code-answer{width:100%;min-height:130px;font-family:'Courier New',monospace;font-size:13px;padding:12px;border:1px solid #e0ddd5;border-radius:8px;background:#fafaf7;color:#1a1a1a;resize:vertical;line-height:1.6}
+textarea.code-answer:focus{outline:none;border-color:#059669;background:#fff}
+.short-answer{width:100%;font-size:14px;padding:10px 14px;border:1px solid #e0ddd5;border-radius:8px;background:#fafaf7;color:#1a1a1a;font-family:inherit}
+.short-answer:focus{outline:none;border-color:#059669;background:#fff}
+.q-timer-bar{height:3px;background:#e5e2d9;border-radius:2px;margin-top:14px;overflow:hidden}
+.q-timer-fill{height:100%;background:#059669;border-radius:2px;transition:width 1s linear,background 0.5s}
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;flex-wrap:wrap;gap:10px}
+.q-dots{display:flex;gap:5px;flex-wrap:wrap;max-width:360px}
+.dot{width:11px;height:11px;border-radius:50%;background:#e0ddd5;cursor:pointer;transition:background 0.2s}
+.dot.answered{background:#059669}
+.dot.current{background:#2563eb}
+.dot.skipped{background:#d97706}
+.btn{font-family:inherit;font-size:13px;padding:9px 18px;border:1px solid #c8c5bc;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;transition:all 0.15s;font-weight:500}
+.btn:hover{background:#f0efea;border-color:#a3a39a}
+.btn.primary{background:#059669;border-color:#059669;color:#fff}
+.btn.primary:hover{background:#047857}
+.btn:disabled{opacity:0.4;cursor:default}
+.btn-row{display:flex;gap:8px}
+
+/* RESULTS */
+.score-card{background:#fff;border:1px solid #e0ddd5;border-radius:12px;padding:32px;text-align:center;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.score-big{font-size:64px;font-weight:700;color:#1a1a1a;line-height:1}
+.score-label{font-size:14px;color:#666;margin-top:10px}
+.verdict{font-size:16px;font-weight:600;margin-top:16px}
+.verdict.pass{color:#059669}
+.verdict.fail{color:#dc2626}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat{background:#fff;border:1px solid #e0ddd5;border-radius:8px;padding:14px;text-align:center}
+.stat-num{font-size:22px;font-weight:600;color:#1a1a1a}
+.stat-lbl{font-size:11px;color:#888;margin-top:3px}
+.review-card{background:#fff;border:1px solid #e0ddd5;border-radius:10px;padding:16px;margin-bottom:10px}
+.review-q{font-size:13px;color:#1a1a1a;margin-bottom:10px;line-height:1.5}
+.review-ans{font-size:12px;font-family:'Courier New',monospace;padding:9px 12px;border-radius:6px;margin-bottom:6px;line-height:1.5;word-break:break-word}
+.review-ans.correct{background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46}
+.review-ans.wrong{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b}
+.review-ans.partial{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+.review-note{font-size:11px;color:#666;margin-top:6px;font-family:inherit;line-height:1.5}
+.cheat-log{font-size:11px;color:#888;margin-top:10px;padding:10px 14px;background:#fff;border:1px solid #e0ddd5;border-radius:8px;line-height:1.6}
+.cheat-log .flag{color:#dc2626;font-weight:600}
+.reviewer-note{margin-top:20px;padding:14px 18px;background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;font-size:12px;color:#92400e;line-height:1.6}
+.email-status{padding:14px 18px;border-radius:10px;font-size:13px;margin-bottom:16px;text-align:center;font-weight:500}
+.email-status.sending{background:#eff6ff;border:1px solid #93c5fd;color:#1d4ed8}
+.email-status.sent{background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46}
+.email-status.failed{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b}
+.candidate-badge{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 16px;font-size:13px;color:#166534;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="start-wrap">
+  <div class="start-card">
+    <div class="start-title">Senior Java + DevOps<br>Technical Examination</div>
+    <div class="start-sub">18 questions · 70 minutes · Proctored<br>Your results will be sent automatically to the hiring team.</div>
+
+    <div class="start-rules">
+      <h3>⚠ Rules — read carefully before starting</h3>
+      <ul>
+        <li>You have <strong>70 minutes</strong> total. The exam auto-submits when time runs out.</li>
+        <li>Each question has its own time limit — it auto-advances when expired.</li>
+        <li>Do <strong>not</strong> switch tabs, open other windows, or use search engines.</li>
+        <li>All tab switches and window focus losses are <strong>recorded and reported</strong>.</li>
+        <li>Copy/paste and right-click are disabled during the exam.</li>
+        <li>Your results including all violations will be emailed to the hiring team automatically.</li>
+        <li>Once you click Start — the timer begins immediately.</li>
+      </ul>
+    </div>
+
+    <div class="field-group">
+      <label>Full Name *</label>
+      <input type="text" id="input-name" placeholder="e.g. John Smith" autocomplete="off">
+      <div class="field-error" id="err-name">Please enter your full name</div>
+    </div>
+    <div class="field-group">
+      <label>Email Address *</label>
+      <input type="email" id="input-email" placeholder="e.g. john@example.com" autocomplete="off">
+      <div class="field-error" id="err-email">Please enter a valid email address</div>
+    </div>
+    <div class="field-group">
+      <label>Position Applied For</label>
+      <input type="text" id="input-position" placeholder="e.g. Senior Java Backend Developer" autocomplete="off">
+    </div>
+
+    <button class="btn primary" style="width:100%;padding:14px;font-size:15px;margin-top:8px" onclick="startExam()">
+      I have read the rules — Start Exam →
+    </button>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="exam-wrap">
+  <div class="exam-header">
+    <div>
+      <div class="exam-title">Senior Java + DevOps — Technical Examination</div>
+      <div class="exam-sub" id="candidate-label">18 questions · 70 minutes · Proctored</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="timer" id="main-timer">70:00</div>
+    </div>
+  </div>
+
+  <div id="warn-banner" class="warn-banner"></div>
+  <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div id="q-section"></div>
+
+  <div class="nav-row">
+    <div class="q-dots" id="q-dots"></div>
+    <div class="btn-row">
+      <button class="btn" id="btn-prev" onclick="navigate(-1)" disabled>← Prev</button>
+      <button class="btn" id="btn-skip" onclick="skipQ()">Skip</button>
+      <button class="btn primary" id="btn-next" onclick="navigate(1)">Next →</button>
+      <button class="btn primary" id="btn-submit" onclick="submitExam()" style="display:none">Submit exam</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="result-wrap"></div>
+
+<script>
+emailjs.init('_AEpsKQ9AyhTYyT02');
+
+const QUESTIONS = [
+  {section:"Core Java",q:"What is the output of this code? Explain why.\n\nint x = 5;\nSystem.out.println(x++ + \" \" + ++x);",type:"short",answer_key:"Output: \"5 7\" — x++ returns 5 then increments x to 6. ++x pre-increments x to 7.",explanation:"x++ uses post-increment: returns current value (5) then increments. By the time ++x evaluates, x is 6, so ++x returns 7. Output: 5 7",time:90,points:5},
+  {section:"Core Java",q:"What is the difference between HashMap and ConcurrentHashMap? When would you choose one over the other in a multi-threaded application?",type:"short",answer_key:"HashMap is not thread-safe. ConcurrentHashMap uses segment/bucket-level locking for safe concurrent access.",explanation:"HashMap: not thread-safe, null keys allowed. ConcurrentHashMap: thread-safe via CAS + synchronized (Java 8+), no null keys/values. Use ConcurrentHashMap when multiple threads read/write concurrently.",time:120,points:8},
+  {section:"Core Java",q:"Which of the following correctly describes the behavior of the volatile keyword in Java?",type:"mcq",options:["It makes compound operations like i++ atomic","It ensures visibility of changes to a variable across threads but does not guarantee atomicity","It prevents multiple threads from accessing a variable simultaneously","It is equivalent to using synchronized on a method"],correct:1,answer_key:"Option B — volatile ensures memory visibility but not atomicity.",explanation:"volatile guarantees that writes are visible to all threads immediately but does NOT make compound operations atomic. Use AtomicInteger for atomic compound ops.",time:60,points:5},
+  {section:"Core Java",q:"Write a generic method that takes a List<T> and a Predicate<T>, and returns a new List<T> containing only elements that match the predicate. Use Java 8+ streams.",type:"code",answer_key:"public static <T> List<T> filter(List<T> list, Predicate<T> p) {\n  return list.stream().filter(p).collect(Collectors.toList());\n}",explanation:"Key elements: generic <T>, Predicate<T> parameter, stream().filter(p).collect(Collectors.toList()).",time:180,points:10},
+  {section:"Spring Boot",q:"What is the difference between @Component, @Service, @Repository, and @Controller in Spring? Are they interchangeable?",type:"short",answer_key:"All are @Component specializations. @Repository adds exception translation. @Controller enables MVC. @Service is semantic.",explanation:"Functionally mostly interchangeable (all trigger component scan). @Repository adds PersistenceExceptionTranslation. @Controller enables request mapping.",time:120,points:8},
+  {section:"Spring Boot",q:"In Spring Boot, what profile-specific config file would override base application.properties values when the 'prod' profile is active? What property activates it?",type:"short",answer_key:"application-prod.properties (or .yml). Activated via spring.profiles.active=prod",explanation:"Spring Boot loads application-{profile}.properties when that profile is active. Values in the profile file override the base file.",time:90,points:5},
+  {section:"Spring Boot",q:"Write a Spring Boot REST controller endpoint that:\n- Accepts POST at /api/users\n- Reads a JSON body into a UserDto object\n- Validates it with Bean Validation\n- Returns HTTP 201 Created with the saved object",type:"code",answer_key:"@PostMapping(\"/api/users\")\n@ResponseStatus(HttpStatus.CREATED)\npublic UserDto createUser(@Valid @RequestBody UserDto dto) {\n  return userService.save(dto);\n}",explanation:"Must have: @PostMapping, @ResponseStatus(CREATED) or ResponseEntity.status(201), @Valid, @RequestBody, UserDto parameter.",time:240,points:12},
+  {section:"Spring Boot",q:"Which Spring Boot annotation registers a bean ONLY when a specific class is present on the classpath?",type:"mcq",options:["@ConditionalOnBean","@ConditionalOnClass","@ConditionalOnProperty","@ConditionalOnExpression"],correct:1,answer_key:"@ConditionalOnClass",explanation:"@ConditionalOnClass registers the bean only when the specified class is on the classpath. Used in Spring Boot auto-configuration.",time:60,points:5},
+  {section:"Databases & JPA",q:"What is the N+1 query problem in JPA/Hibernate? How do you detect it and what are two ways to fix it?",type:"short",answer_key:"N+1: 1 query loads parents, then N separate queries load each child. Fix: JOIN FETCH or @EntityGraph.",explanation:"Detect via SQL logging. Fix 1: JOIN FETCH in JPQL. Fix 2: @EntityGraph. Fix 3: @BatchSize.",time:150,points:10},
+  {section:"Databases & JPA",q:"Write a JPQL query that fetches all Orders with their associated OrderItems eagerly in a single query, filtering only orders where status = 'PENDING'.",type:"code",answer_key:"SELECT o FROM Order o JOIN FETCH o.orderItems WHERE o.status = 'PENDING'",explanation:"JOIN FETCH forces eager loading in a single SQL JOIN, avoiding N+1. Named parameter version also correct.",time:150,points:8},
+  {section:"Databases & JPA",q:"Which database isolation level prevents dirty reads but still allows non-repeatable reads and phantom reads?",type:"mcq",options:["READ UNCOMMITTED","READ COMMITTED","REPEATABLE READ","SERIALIZABLE"],correct:1,answer_key:"READ COMMITTED",explanation:"READ COMMITTED prevents dirty reads but allows non-repeatable reads and phantom reads.",time:60,points:5},
+  {section:"Docker & DevOps",q:"Write a minimal production-ready Dockerfile for a Spring Boot JAR (app.jar). Use Java 21, expose port 8080, and run the application.",type:"code",answer_key:"FROM eclipse-temurin:21-jre-alpine\nCOPY app.jar app.jar\nEXPOSE 8080\nENTRYPOINT [\"java\", \"-jar\", \"app.jar\"]",explanation:"Key: Java 21 base image, COPY app.jar, EXPOSE 8080, ENTRYPOINT in exec form (array syntax).",time:180,points:10},
+  {section:"Docker & DevOps",q:"What is the difference between CMD and ENTRYPOINT in a Dockerfile? What happens when you use both together?",type:"short",answer_key:"ENTRYPOINT sets fixed executable. CMD provides default arguments overridable at runtime. Together: CMD args passed to ENTRYPOINT.",explanation:"ENTRYPOINT: fixed command. CMD: default arguments, fully overridden if docker run includes a command. Together: ENTRYPOINT is executable, CMD is default arguments.",time:90,points:6},
+  {section:"Docker & DevOps",q:"In docker-compose.yml, what does depends_on guarantee? What does it NOT guarantee, and how do you fix that limitation?",type:"short",answer_key:"Guarantees container start order. Does NOT guarantee service readiness. Fix: healthcheck + condition: service_healthy.",explanation:"depends_on only waits for container process to start, not service readiness. Fix: add healthcheck and use condition: service_healthy.",time:90,points:6},
+  {section:"Docker & DevOps",q:"Which docker command shows the last 50 log lines from a container named 'backend-app' and follows new output in real time?",type:"mcq",options:["docker logs backend-app --tail 50","docker logs backend-app --tail 50 --follow","docker inspect backend-app --logs 50","docker exec backend-app logs --tail 50 -f"],correct:1,answer_key:"docker logs backend-app --tail 50 --follow",explanation:"--tail 50 shows last 50 lines. --follow keeps stream open for new output.",time:45,points:4},
+  {section:"System Design",q:"Design a rate limiter for a REST API that allows 100 requests per minute per user. Describe:\n1. The algorithm\n2. The Redis data structure\n3. How to implement in Spring Boot",type:"code",answer_key:"Algorithm: sliding window or token bucket. Redis: INCR+EXPIRE per user per minute. Spring: HandlerInterceptor or @Aspect.",explanation:"Full credit: algorithm named, Redis key structure shown, Spring interceptor or AOP implementation, handles race condition.",time:300,points:15},
+  {section:"System Design",q:"A PostgreSQL query runs 50,000 times per day on a table with 10 million rows causing high latency. List 4 specific steps to diagnose and resolve this — in priority order.",type:"short",answer_key:"1. EXPLAIN ANALYZE  2. Add index on filtered columns  3. Optimize query  4. Add Redis cache",explanation:"EXPLAIN ANALYZE, check for Seq Scan, create composite index, rewrite query, add Redis cache for read-heavy data.",time:180,points:10},
+  {section:"Code Review",q:"Identify at least 3 problems with this code and explain how to fix each:\n\npublic List<User> getUsers() {\n  List<User> users = new ArrayList();\n  for(int i=0; i<100; i++) {\n    User u = userRepo.findById(i);\n    if(u.getEmail() != null) {\n      users.add(u);\n    }\n  }\n  return users;\n}",type:"short",answer_key:"1. Raw type ArrayList()  2. findById returns Optional — NPE risk  3. 100 separate DB queries (N+1)  4. Hardcoded limit of 100",explanation:"(1) Raw type → use diamond <>. (2) findById returns Optional<User> — NPE if not found. (3) 100 queries — use findAllById(). (4) Hardcoded 100 is a design smell.",time:180,points:12}
+];
+
+let current=0, answers=new Array(QUESTIONS.length).fill(null), skipped=new Array(QUESTIONS.length).fill(false);
+let totalSecs=70*60, qTimers=QUESTIONS.map(q=>q.time);
+let timerInterval, qTimerInterval, cheats=0, cheatLog=[], submitted=false;
+let candidateName='', candidateEmail='', candidatePosition='';
+
+function startExam() {
+  const name = document.getElementById('input-name').value.trim();
+  const email = document.getElementById('input-email').value.trim();
+  const position = document.getElementById('input-position').value.trim();
+  let valid = true;
+
+  document.getElementById('err-name').style.display = 'none';
+  document.getElementById('err-email').style.display = 'none';
+
+  if (!name) { document.getElementById('err-name').style.display = 'block'; valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; valid = false; }
+  if (!valid) return;
+
+  candidateName = name;
+  candidateEmail = email;
+  candidatePosition = position || 'Not specified';
+
+  document.getElementById('start-wrap').style.display = 'none';
+  document.getElementById('exam-wrap').style.display = 'block';
+  document.getElementById('candidate-label').textContent = candidateName + ' · 18 questions · 70 minutes';
+
+  renderDots(); renderQuestion(); startMainTimer(); setupAntiCheat();
+}
+
+function renderDots(){
+  const w=document.getElementById('q-dots'); w.innerHTML='';
+  QUESTIONS.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(answers[i]!==null?' answered':'')+(skipped[i]&&answers[i]===null?' skipped':'')+(i===current?' current':'');
+    d.title='Q'+(i+1); d.onclick=()=>{current=i;renderQuestion();renderDots();};
+    w.appendChild(d);
+  });
+}
+
+function renderQuestion(){
+  clearInterval(qTimerInterval);
+  const q=QUESTIONS[current], total=QUESTIONS.length;
+  document.getElementById('progress-bar').style.width=((current+1)/total*100)+'%';
+  document.getElementById('btn-prev').disabled=current===0;
+  const isLast=current===total-1;
+  document.getElementById('btn-next').style.display=isLast?'none':'';
+  document.getElementById('btn-submit').style.display=isLast?'':'none';
+
+  let inputHtml='';
+  if(q.type==='mcq'){
+    inputHtml='<div class="options">'+q.options.map((o,i)=>{
+      const sel=answers[current]===i;
+      return`<label class="opt${sel?' selected':''}" onclick="selectOpt(${i})"><input type="radio" name="q${current}" ${sel?'checked':''} style="pointer-events:none"> ${o}</label>`;
+    }).join('')+'</div>';
+  } else if(q.type==='code'){
+    const v=answers[current]||'';
+    inputHtml=`<textarea class="code-answer" placeholder="// Write your code here..." oninput="saveAns(this.value)">${v}</textarea>`;
+  } else {
+    const v=(answers[current]||'').replace(/"/g,'&quot;');
+    inputHtml=`<input class="short-answer" type="text" placeholder="Type your answer..." value="${v}" oninput="saveAns(this.value)">`;
+  }
+
+  const pct=(qTimers[current]/q.time)*100, crit=pct<30;
+  document.getElementById('q-section').innerHTML=`
+    <div class="section-label">${q.section}</div>
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="q-num">Question ${current+1} of ${total} &nbsp;·&nbsp; ${q.points} pts</span>
+        <span class="q-time-badge${crit?' critical':''}" id="q-badge">⏱ ${qTimers[current]}s</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      ${inputHtml}
+      <div class="q-timer-bar"><div class="q-timer-fill" id="q-fill" style="width:${pct}%;${crit?'background:#dc2626':''}"></div></div>
+    </div>`;
+  startQTimer(); renderDots();
+}
+
+function startQTimer(){
+  clearInterval(qTimerInterval);
+  qTimerInterval=setInterval(()=>{
+    if(qTimers[current]>0){
+      qTimers[current]--;
+      const pct=(qTimers[current]/QUESTIONS[current].time)*100;
+      const b=document.getElementById('q-badge'),f=document.getElementById('q-fill');
+      if(b){b.textContent='⏱ '+qTimers[current]+'s'; if(pct<30)b.className='q-time-badge critical';}
+      if(f){f.style.width=pct+'%'; if(pct<30)f.style.background='#dc2626';}
+    } else { clearInterval(qTimerInterval); if(current<QUESTIONS.length-1)navigate(1); else submitExam(); }
+  },1000);
+}
+
+function startMainTimer(){
+  timerInterval=setInterval(()=>{
+    if(submitted){clearInterval(timerInterval);return;}
+    totalSecs--;
+    const m=Math.floor(totalSecs/60),s=totalSecs%60;
+    const el=document.getElementById('main-timer');
+    if(el){el.textContent=m+':'+String(s).padStart(2,'0'); if(totalSecs<300)el.className='timer warn';}
+    if(totalSecs<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function selectOpt(i){answers[current]=i; skipped[current]=false; renderQuestion();}
+function saveAns(v){answers[current]=v||null;}
+function navigate(dir){
+  if(dir===1&&current<QUESTIONS.length-1){if(answers[current]===null)skipped[current]=true; current++;}
+  else if(dir===-1&&current>0)current--;
+  renderQuestion();
+}
+function skipQ(){skipped[current]=true; if(current<QUESTIONS.length-1){current++;renderQuestion();}}
+
+function setupAntiCheat(){
+  const warn=(msg)=>{
+    if(submitted)return;
+    cheats++; cheatLog.push(new Date().toLocaleTimeString()+' — '+msg+' (#'+cheats+')');
+    const b=document.getElementById('warn-banner');
+    if(b){b.textContent='⚠ Warning #'+cheats+': '+msg+'. All violations are logged and reported to the hiring team.'; b.className='warn-banner show'; setTimeout(()=>{if(b)b.className='warn-banner';},5000);}
+  };
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)warn('tab or window switch detected');});
+  window.addEventListener('blur',()=>warn('window lost focus'));
+  document.addEventListener('contextmenu',e=>e.preventDefault());
+  document.addEventListener('copy',e=>{if(!submitted)e.preventDefault();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['i','I','j','J'].includes(e.key))||(e.ctrlKey&&e.key==='u'))e.preventDefault();
+    if((e.ctrlKey||e.metaKey)&&['c','a','f'].includes(e.key.toLowerCase()))e.preventDefault();
+  });
+}
+
+function submitExam(){
+  if(submitted)return;
+  submitted=true;
+  clearInterval(timerInterval); clearInterval(qTimerInterval);
+  document.getElementById('exam-wrap').style.display='none';
+
+  let autoScore=0, maxPts=0, reviewHtml='', emailDetail='';
+
+  QUESTIONS.forEach((q,i)=>{
+    maxPts+=q.points;
+    const ans=answers[i];
+    let status='wrong', pts=0, displayAns=ans||'(no answer)';
+    if(q.type==='mcq'){
+      if(ans===q.correct){status='correct'; pts=q.points; autoScore+=pts;}
+    } else {
+      if(ans&&ans.trim().length>15){status='partial'; pts=Math.round(q.points*0.5); autoScore+=pts;}
+    }
+
+    reviewHtml+=`<div class="review-card">
+      <div class="q-meta" style="margin-bottom:10px">
+        <span class="q-num">${q.section} · Q${i+1} · ${q.points} pts</span>
+        <span class="q-time-badge" style="${status==='correct'?'border-color:#6ee7b7;color:#065f46':status==='partial'?'border-color:#fcd34d;color:#92400e':'border-color:#fca5a5;color:#991b1b'}">${pts}/${q.points} pts${q.type!=='mcq'?' (needs review)':''}</span>
+      </div>
+      <div class="review-q">${q.q.substring(0,150)}${q.q.length>150?'...':''}</div>
+      <div class="review-ans ${status}">Candidate: ${q.type==='mcq'&&ans!==null?q.options[ans]:displayAns}</div>
+      <div class="review-ans correct">✓ Expected: ${q.answer_key}</div>
+      <div class="review-note">${q.explanation}</div>
+    </div>`;
+
+    emailDetail+=`\nQ${i+1} [${q.section}] (${pts}/${q.points} pts):\n`;
+    emailDetail+=`Question: ${q.q.substring(0,100)}...\n`;
+    emailDetail+=`Answer: ${q.type==='mcq'&&ans!==null?q.options[ans]:displayAns}\n`;
+    emailDetail+=`Expected: ${q.answer_key}\n`;
+    emailDetail+='---\n';
+  });
+
+  const pct=Math.round(autoScore/maxPts*100);
+  const passed=pct>=70;
+  const used=70*60-totalSecs;
+  const um=Math.floor(used/60),us=used%60;
+
+  const rw=document.getElementById('result-wrap');
+  rw.innerHTML=`
+    <div class="candidate-badge">👤 ${candidateName} &nbsp;·&nbsp; ${candidateEmail} &nbsp;·&nbsp; ${candidatePosition}</div>
+    <div id="email-status" class="email-status sending">📧 Sending results to hiring team...</div>
+    <div class="score-card">
+      <div class="score-big">${pct}%</div>
+      <div class="score-label">Auto-graded: ${autoScore} / ${maxPts} points · Open questions need manual review</div>
+      <div class="verdict ${passed?'pass':'fail'}">${passed?'✓ Passed threshold (≥70%)':'✗ Below threshold (<70%)'}</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">${QUESTIONS.filter((_,i)=>answers[i]!==null).length}</div><div class="stat-lbl">answered</div></div>
+      <div class="stat"><div class="stat-num">${QUESTIONS.filter((_,i)=>skipped[i]&&answers[i]===null).length}</div><div class="stat-lbl">skipped</div></div>
+      <div class="stat"><div class="stat-num">${um}m ${us}s</div><div class="stat-lbl">time used</div></div>
+      <div class="stat"><div class="stat-num" style="${cheats>2?'color:#dc2626':''}">${cheats}</div><div class="stat-lbl">violations</div></div>
+    </div>
+    ${cheats>0?`<div class="cheat-log"><span class="flag">Integrity log (${cheats} violation${cheats>1?'s':''}):</span><br>${cheatLog.map(l=>'• '+l).join('<br>')}</div>`:''}
+    <div class="section-label" style="margin-top:20px;margin-bottom:10px">Detailed answer review</div>
+    ${reviewHtml}
+    <div class="reviewer-note">
+      <strong>Reviewer instructions:</strong> MCQ answers are auto-graded. Short answer and code questions are marked partial (50%) if any response was given — manually review against expected answers above. Award full points for correct concepts even if wording differs. 70%+ after manual review is the recommended pass threshold.
+    </div>`;
+  rw.style.display='block';
+  window.scrollTo(0,0);
+
+  // Send email via EmailJS
+  emailjs.send('service_g15j7pe', 'nfpv9um', {
+    candidate_name: candidateName,
+    candidate_email: candidateEmail,
+    candidate_position: candidatePosition,
+    score: pct + '% (' + autoScore + '/' + maxPts + ' pts)',
+    verdict: passed ? 'PASSED' : 'FAILED',
+    time_used: um + ' min ' + us + ' sec',
+    violations: cheats + (cheats > 0 ? ' — ' + cheatLog.join(', ') : ''),
+    results_detail: emailDetail,
+    exam_date: new Date().toLocaleString()
+  }).then(() => {
+    const el = document.getElementById('email-status');
+    if(el){ el.className='email-status sent'; el.textContent='✓ Results successfully sent to the hiring team.'; }
+  }).catch((err) => {
+    const el = document.getElementById('email-status');
+    if(el){ el.className='email-status failed'; el.textContent='⚠ Could not send email automatically. Please screenshot this page and send to the hiring team.'; }
+    console.error('EmailJS error:', err);
+  });
+}
+</script>
+</body>
+</html>
